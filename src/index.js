@@ -38,15 +38,21 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-   return expr
-    .split('  ')
+    MORSE_TABLE['**********'] = ' ';
+  return expr
+    .match(/.{1,10}/g)
     .map(
       a => a
-        .split(' ')
+        .split('00')
+        .join("")
+        .split(10)
+        .join('.')
+        .split(11)
+        .join('-'))
         .map(
           b => MORSE_TABLE[b]
-        ).join('')
-    ).join(' ').trim(); 
+        )
+    .join(''); 
 }
 
 module.exports = {
